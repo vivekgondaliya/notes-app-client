@@ -23,7 +23,7 @@ class App extends Component {
     handleLogout = event => {
       this.userHasAuthenticated(false);
     }
-    
+
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
       userHasAuthenticated: this.userHasAuthenticated
@@ -69,3 +69,8 @@ export default App;
 // But by using the Fragment component it tells React that
 // the two links are inside this component but we don’t want
 // to render any extra HTML.
+
+
+//Now if you refresh your page you should be logged out again.
+//This is because we are not initializing the state from the
+//browser session.
