@@ -25,6 +25,9 @@ export default class Login extends Component {
   handleSubmit = event => {
     event.preventDefault();
     //call your login service here
+    
+    //on successful login update userAuthenticaiton via <AppliedRoutes>
+    //this.props.userHasAuthenticated(true);
   }
 
   render() {
