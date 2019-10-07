@@ -35,6 +35,8 @@ class App extends Component {
   }
   
   handleLogout = event => {
+    //clear cookies or session before logout to avoid auto login on refresh
+    //Auth.signOut()
     this.userHasAuthenticated(false);
   }
 
