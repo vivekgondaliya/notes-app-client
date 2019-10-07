@@ -8,7 +8,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      isLoading: false
     };
   }
 
@@ -24,11 +25,19 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    //1. call your login service here
-    //2. on successful login update userAuthenticaiton via <AppliedRoutes>
-    //this.props.userHasAuthenticated(true);
-    //3. redirect to Home on Login
-    //this.props.history.push("/");
+
+    this.setState({isLoading: true});
+    try {
+      //1. call your login service here
+      // Auth.signIn(this.state.email, this.state.password)
+      //2. on successful login update userAuthenticaiton via <AppliedRoutes>
+      //this.props.userHasAuthenticated(true);
+      //3. redirect to Home on Login
+      //this.props.history.push("/");
+    } catch (error) {
+        alert(e.message);
+        this.setState({isLoading: false})
+    }
   }
 
   render() {
