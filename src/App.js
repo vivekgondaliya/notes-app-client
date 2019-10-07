@@ -11,8 +11,23 @@ class App extends Component {
     super(props);
   
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
+      isAuthenticating: true
     };
+  }
+
+  async componentDidMount(){
+    try{
+      //get current session and update the state
+      // await Authorization call
+      // this.userHasAuthenticated(true);
+    }
+    catch(e){
+      if(e !== "No Current User"){
+        alert(e);
+      }
+    }
+    this.setState({'isAuthenticating' : false});
   }
   
   userHasAuthenticated = authenticated => {
@@ -22,14 +37,15 @@ class App extends Component {
   handleLogout = event => {
     this.userHasAuthenticated(false);
   }
-  
+
   render() {
     const childProps = {
       isAuthenticated: this.state.isAuthenticated,
       userHasAuthenticated: this.userHasAuthenticated
     };
-
+  
     return (
+      !this.state.isAuthenticating &&
       <div className="App container">
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
@@ -40,24 +56,24 @@ class App extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav pullRight>
-            {this.state.isAuthenticated
-              ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-              : <Fragment>
-                  <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
-                  </LinkContainer>
-                </Fragment>
-            }
+              {this.state.isAuthenticated
+                ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
+                : <Fragment>
+                    <LinkContainer to="/signup">
+                      <NavItem>Signup</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/login">
+                      <NavItem>Login</NavItem>
+                    </LinkContainer>
+                  </Fragment>
+              }
             </Nav>
           </Navbar.Collapse>
         </Navbar>
         <Routes childProps={childProps} />
       </div>
     );
-  }  
+  }   
 }
 
 export default App;
