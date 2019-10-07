@@ -24,10 +24,11 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    //call your login service here
-    
-    //on successful login update userAuthenticaiton via <AppliedRoutes>
+    //1. call your login service here
+    //2. on successful login update userAuthenticaiton via <AppliedRoutes>
     //this.props.userHasAuthenticated(true);
+    //3. redirect to Home on Login
+    //this.props.history.push("/");
   }
 
   render() {

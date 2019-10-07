@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -35,9 +35,11 @@ class App extends Component {
   }
   
   handleLogout = event => {
-    //clear cookies or session before logout to avoid auto login on refresh
+    //1. clear cookies or session before logout to avoid auto login on refresh
     //Auth.signOut()
     this.userHasAuthenticated(false);
+    //2. redirect after logout
+    this.props.history.push("/login");
   }
 
   render() {
@@ -78,7 +80,7 @@ class App extends Component {
   }   
 }
 
-export default App;
+export default withRouter(App);
 
 // The Fragment component can be thought of as a placeholder
 // component. We need this because in the case the user is 
