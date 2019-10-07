@@ -40,12 +40,32 @@ export default class Signup extends Component {
     });
   }
 
+  handleResendSignUp(){
+    alert("Resending Code From Here...");
+  }
+
   handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({ isLoading: true });
 
-    this.setState({ newUser: "test" });
+    try {
+      //create a NEW USER
+      const newUser = {
+        username: this.state.email,
+        password: this.state.password
+      };
+
+      //save NEW USER
+      this.setState({
+        newUser
+      });
+    } catch (e) {
+      if(e === "UsernameExistException"){
+        alert("user already exist");
+      }
+      alert(e.message);
+    }
 
     this.setState({ isLoading: false });
   }
@@ -54,6 +74,21 @@ export default class Signup extends Component {
     event.preventDefault();
 
     this.setState({ isLoading: true });
+
+    try {
+      //confirm signup with code and email
+      //await Auth.confirmSignUp(this.state.email, this.state.confirmationCode);
+      
+      //upon successful confirmation, login user
+      //await Auth.signIn(this.state.email, this.state.password);
+      
+      //update userAuthentication and redirect to homepage
+      this.props.userHasAuthenticated(true);
+      this.props.history.push("/");
+    } catch (e) {
+      alert(e.message);
+      this.setState({ isLoading: false });
+    }
   }
 
   renderConfirmationForm() {
