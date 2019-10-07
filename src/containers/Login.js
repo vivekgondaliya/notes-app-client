@@ -37,7 +37,7 @@ export default class Login extends Component {
       //3. redirect to Home on Login
       //this.props.history.push("/");
     } catch (error) {
-        alert(e.message);
+        alert(error.message);
         this.setState({isLoading: false})
     }
   }
